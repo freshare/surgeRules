@@ -1,0 +1,26 @@
+#!name=自定义高优先级规则与参数覆写
+#!desc=独立于托管配置生效
+
+[General]
+# === 1. 强制锁定本地与局域网监听端口（覆盖机场托管配置）===
+http-listen = 0.0.0.0:6152
+socks5-listen = 0.0.0.0:6153
+port = 6152
+socks-port = 6153
+
+# === 2. TUN 物理路由排除（内网与虚拟组网流量 100% 绕开 utun 虚拟网卡）===
+tun-excluded-routes = %APPEND% 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10
+
+[Rule]
+# === 含有 tag 关键字的站点（直接放行不走代理）===
+DOMAIN-KEYWORD,tagss,DIRECT
+DOMAIN-KEYWORD,tagvip,DIRECT
+DOMAIN-KEYWORD,tagxx,DIRECT
+
+# === Parsec 进程与域名级直连 ===
+PROCESS-NAME,parsecd,DIRECT
+PROCESS-NAME,Parsec,DIRECT
+PROCESS-NAME,parsec,DIRECT
+DOMAIN-SUFFIX,parsec.app,DIRECT
+DOMAIN-SUFFIX,parsecgaming.com,DIRECT
+DOMAIN-KEYWORD,parsec,DIRECT
