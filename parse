@@ -15,7 +15,7 @@ tun-excluded-routes = %APPEND% 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64
 # === OpenClaw Forward Proxy 安全限制 ===
 # 仅针对进入 Surge HTTP Proxy :6152 的请求
 # 禁止代理访问本机 IPv4 Loopback，满足 OpenClaw proxy validate 安全检查
-AND,((IN-PORT,6152),(IP-CIDR,127.0.0.0/8,no-resolve)),REJECT
+# AND,((IN-PORT,6152),(IP-CIDR,127.0.0.0/8,no-resolve)),REJECT
 
 # === 含有 tag 关键字的站点（直接放行不走代理）===
 DOMAIN-KEYWORD,tagss,DIRECT
